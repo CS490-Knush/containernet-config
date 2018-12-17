@@ -31,29 +31,35 @@ s7 = net.addSwitch('s7')
 s8 = net.addSwitch('s8')
 
 info('*** Creating links\n')
-net.addLink(c1, s1, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(c2, s6, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(st3, s3, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(st4, s8, cls=TCLink, bw = 50, use_tbf = True)
+# hosts
+net.addLink(c1, s1, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(c2, s6, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(st3, s3, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(st4, s8, cls=TCLink, bw = 25, use_tbf = True)
 
-net.addLink(s1, s2, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s2, s3, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s1, s4, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s3, s5, cls=TCLink, bw = 50, use_tbf = True)
+# top
+net.addLink(s1, s2, cls=TCLink, bw = 20, use_tbf = True)
+net.addLink(s2, s3, cls=TCLink, bw = 20, use_tbf = True)
 
-net.addLink(s4, s6, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s6, s7, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s7, s8, cls=TCLink, bw = 50, use_tbf = True)
-net.addLink(s5, s8, cls=TCLink, bw = 50, use_tbf = True)
+# bottom
+net.addLink(s6, s7, cls=TCLink, bw = 20, use_tbf = True)
+net.addLink(s7, s8, cls=TCLink, bw = 20, use_tbf = True)
 
-net.addLink(s4, s5, cls=TCLink, bw = 20, use_tbf = True)
+# X
+net.addLink(s1, s4, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(s3, s5, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(s4, s6, cls=TCLink, bw = 25, use_tbf = True)
+net.addLink(s5, s8, cls=TCLink, bw = 25, use_tbf = True)
+
+# shared
+net.addLink(s4, s5, cls=TCLink, bw = 25, use_tbf = True)
 
 info('*** Starting network\n')
 net.start()
 info('*** Testing connectivity\n')
 net.ping([c1, c2, st3, st4])
-info('*** Running CLI\n')
-CLI(net)
-info('*** Stopping network')
-net.stop()
+# info('*** Running CLI\n')
+# CLI(net)
+# info('*** Stopping network')
+# net.stop()
 
